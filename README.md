@@ -90,11 +90,6 @@ npm run preview
 
 ---
 
-## 📸 Screenshots (replace these after running)
-
-- *(Insert screenshot of RPC Demo here)*
-- *(Insert screenshot of Lamport RA here)*
-
 ---
 
 ## 🌐 Deploy to Netlify
@@ -123,30 +118,4 @@ npm run preview
 
 ---
 
-## 🛠️ Troubleshooting
-
-- **esbuild / Vite “Expected ';' but found ')'”**
-  This usually indicates a stray parenthesis in JSX/JS. A common spot is an async IIFE inside `Array.map`. Example fix:
-  ```diff
-  - })()));
-  + })());
-  ```
-
-- **Blank page after deploy**
-  Ensure redirects are configured for SPA routes (see Netlify section).
-
-- **Styles not loading**
-  Confirm Tailwind is included via `src/index.css` and `content` paths in `tailwind.config.js` match your file locations.
-
 ---
-
-## 🧾 License
-
-MIT © Your Name
-
----
-
-## 🙌 Credits
-
-- RPC demo inspired by classical RPC patterns (simulated for static hosting)
-- Lamport RA visualization based on Ricart–Agrawala algorithm with Lamport timestamps
