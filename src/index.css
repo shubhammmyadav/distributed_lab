@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light dark }
+* { box-sizing: border-box }
+code { padding: 0.1rem 0.25rem; border-radius: 0.375rem; background: #f1f5f9; }
+.card { border-radius: 1rem; border: 1px solid rgb(226 232 240); background: white; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.btn { padding: 0.5rem 1rem; border-radius: 0.75rem; color: white; background: #4f46e5; }
+.input { padding: 0.5rem 0.75rem; border-radius: 0.75rem; border: 1px solid rgb(203 213 225); }
+.select { padding: 0.5rem 0.75rem; border-radius: 0.75rem; border: 1px solid rgb(203 213 225); }
+.label { font-size: 0.9rem; color: rgb(71 85 105); }
+.small { font-size: 0.75rem; color: rgb(100 116 139); }
+@media (prefers-color-scheme: dark) {
+  body { background: #0f172a; color: #e2e8f0 }
+  .card { background: #0b1220; border-color: #334155; box-shadow: 0 4px 24px rgba(0,0,0,0.26); }
+  .btn { background: #6366f1; }
+  .input, .select { background: #0f172a; border-color: #334155; color: #e2e8f0; }
+  .label { color: #cbd5e1 }
+  .small { color: #94a3b8 }
+  code { background: #0b1220; }
+}
