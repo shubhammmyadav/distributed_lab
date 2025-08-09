@@ -32,18 +32,24 @@ export default function LamportRA() {
   const [log, setLog] = useState([]);
   const [state, setState] = useState([]);
   const [packets, setPackets] = useState([]);
-  const gate = useRef({ resolve: null });
+  const gateQueue = useRef([]);
 
   const layout = useCircleLayout(n, 150, 240, 180);
 
   const addLog = (s) => setLog((old) => [{ t: Date.now(), s }, ...old].slice(0, 250));
+  
   const waitGate = async (label) => {
     if (!step) return;
     addLog(`[STEP] ${label} — click "Next step"`);
-    await new Promise((resolve) => (gate.current.resolve = resolve));
-    gate.current.resolve = null;
+    await new Promise((resolve) => gateQueue.current.push(resolve));
   };
-  const nextStep = () => gate.current.resolve && gate.current.resolve();
+
+  const nextStep = () => {
+    const resolve = gateQueue.current.shift();
+    if (resolve) {
+        resolve();
+    }
+  };
 
   function fly(src, dst, kind) {
     const id = Math.random().toString(36).slice(2);
@@ -55,6 +61,7 @@ export default function LamportRA() {
   const start = async () => {
     setRunning(true);
     setLog([]);
+    gateQueue.current = [];
     const bus = makeBus(n);
     const procs = Array.from({ length: n }, (_, pid) => ({
       pid, clock: 0, requesting: false, requestTs: null, deferred: [], repliesNeeded: 0, done: 0,
@@ -174,7 +181,7 @@ export default function LamportRA() {
           )}
           {step && (
             <button
-              onClick={()=>gate.current.resolve && gate.current.resolve()}
+              onClick={nextStep}
               className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white"
             >
               Next step
